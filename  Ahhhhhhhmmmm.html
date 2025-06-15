@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة تحكم TellMePrice</title>
+    <style>
+        body { font-family: sans-serif; background: #f5f5f5; padding: 20px; direction: rtl; }
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        th { background: #222; color: white; }
+        input, select { width: 100%; padding: 5px; }
+        button { padding: 10px 15px; margin-top: 10px; cursor: pointer; }
+        #saveMessage { color: green; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h2>لوحة تحكم الأسعار - TellMePrice</h2>
+
+<table id="deviceTable">
+    <thead>
+        <tr>
+            <th>الموديل</th>
+            <th>المساحة</th>
+            <th>اللون</th>
+            <th>السعر الأساسي</th>
+            <th>نسبة نقصان كل 3% بطارية</th>
+            <th>نسبة نقصان بدون علبة</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<button onclick="addDeviceRow()">➕ إضافة جهاز</button>
+<button onclick="saveData()">💾 حفظ التعديلات</button>
+<div id="saveMessage"></div>
+
+<script>
+    function addDeviceRow(model='', capacity='', color='', basePrice='', batteryDrop='', boxDrop='') {
+        const table = document.getElementById("deviceTable").getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+
+        newRow.insertCell().innerHTML = '<input type="text" value="' + model + '">';
+        newRow.insertCell().innerHTML = '<input type="text" value="' + capacity + '">';
+        newRow.insertCell().innerHTML = '<input type="text" value="' + color + '">';
+        newRow.insertCell().innerHTML = '<input type="number" value="' + basePrice + '">';
+        newRow.insertCell().innerHTML = '<input type="number" value="' + batteryDrop + '">';
+        newRow.insertCell().innerHTML = '<input type="number" value="' + boxDrop + '">';
+    }
+
+    function saveData() {
+        const rows = document.querySelectorAll("#deviceTable tbody tr");
+        let data = [];
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll("td input");
+            data.push({
+                model: cells[0].value,
+                capacity: cells[1].value,
+                color: cells[2].value,
+                basePrice: parseFloat(cells[3].value),
+                batteryDrop: parseFloat(cells[4].value),
+                boxDrop: parseFloat(cells[5].value)
+            });
+        });
+
+        localStorage.setItem("devicePricingData", JSON.stringify(data));
+        document.getElementById("saveMessage").innerText = "✅ تم حفظ التعديلات بنجاح";
+    }
+
+    // Load saved data if exists
+    window.onload = () => {
+        const saved = localStorage.getItem("devicePricingData");
+        if (saved) {
+            const devices = JSON.parse(saved);
+            devices.forEach(d => {
+                addDeviceRow(d.model, d.capacity, d.color, d.basePrice, d.batteryDrop, d.boxDrop);
+            });
+        } else {
+            addDeviceRow();
+        }
+    };
+</script>
+
+</body>
+</html>
