@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TellMePrice</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-image: url('apple-bg-white.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+    select, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    .apple-style {
+      background-color: #1c1c1e;
+      color: #fff;
+    }
+    #priceResult {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #0f0;
+    }
+    #sellNowBtn {
+      display: none;
+      margin-top: 20px;
+      background-color: #007aff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 14px;
+      color: #aaa;
+    }
+    footer img {
+      width: 16px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>TellMePrice 🍏</h1>
+  <p>اختر نوع الايفون، المساحة، اللون، نسبة البطارية، وهل معاه علبة؟</p>
+
+  <select class="apple-style" id="model">
+    <option>iPhone 11</option>
+    <option>iPhone 11 Pro</option>
+    <option>iPhone 11 Pro Max</option>
+    <option>iPhone 12</option>
+    <option>iPhone 12 Pro</option>
+    <option>iPhone 12 Pro Max</option>
+    <option>iPhone 13</option>
+    <option>iPhone 13 Pro</option>
+    <option>iPhone 13 Pro Max</option>
+    <option>iPhone 14</option>
+    <option>iPhone 14 Pro</option>
+    <option>iPhone 14 Pro Max</option>
+    <option>iPhone 15</option>
+    <option>iPhone 15 Pro</option>
+    <option>iPhone 15 Pro Max</option>
+    <option>iPhone 16</option>
+    <option>iPhone 16 Pro</option>
+    <option>iPhone 16 Pro Max</option>
+  </select><br>
+
+  <select class="apple-style" id="storage">
+    <option>64GB</option>
+    <option>128GB</option>
+    <option>256GB</option>
+    <option>512GB</option>
+    <option>1TB</option>
+  </select><br>
+
+  <select class="apple-style" id="color">
+    <option>أسود</option>
+    <option>أبيض</option>
+    <option>ذهبي</option>
+    <option>أزرق</option>
+  </select><br>
+
+  <select class="apple-style" id="battery">
+<option>100%</option>
+<option>97%</option>
+<option>94%</option>
+<option>91%</option>
+<option>88%</option>
+<option>85%</option>
+<option>82%</option>
+<option>79%</option>
+<option>76%</option>
+<option>73%</option>
+<option>70%</option>
+  </select><br>
+
+  <select class="apple-style" id="box">
+    <option>بعلبة</option>
+    <option>بدون علبة</option>
+  </select><br>
+
+  <button class="apple-style" onclick="showPrice()">TellMePrice</button>
+
+  <div id="priceResult"></div>
+  <button id="sellNowBtn" onclick="showContact()">بيع دلوقتي</button>
+  <div id="contactInfo" style="margin-top: 10px; font-size: 18px; color: #fff;"></div>
+
+  <footer>
+    <span>أحمد عصام</span> <img src="apple-icon.png" alt="Apple Logo" />
+  </footer>
+
+  <script>
+    function showPrice() {
+      const model = document.getElementById('model').value;
+      const price = "12345"; // Placeholder
+      document.getElementById('priceResult').innerText = "السعر المتوقع: " + price + " جنيه";
+      document.getElementById('sellNowBtn').style.display = 'inline-block';
+    }
+
+    function showContact() {
+      document.getElementById('contactInfo').innerText = "للتواصل: 01116778157";
+    }
+  </script>
+
+</body>
+</html>
